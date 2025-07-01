@@ -6,11 +6,11 @@ const registerUser =async(user:any)=>{
     .catch(error=> {throw error;});
 }
 
-const loginUser=async(login:any)=>{
-    return axiosInstance.post(`/users/login`,login)
-    .then(res=>res.data)
-    .catch(error=> {throw error;});
-}
+// const loginUser=async(login:any)=>{
+//     return axiosInstance.post(`/users/login`,login)
+//     .then(res=>res.data)
+//     .catch(error=> {throw error;});
+// }
 const sendOtp =async(email:any)=>{
     return axiosInstance.post(`/users/sendOtp/${email}`)
     .then(res=>res.data)
@@ -29,4 +29,4 @@ const changePass=async(email:string,password:string)=>{
     .catch(error=> {throw error;});
 }
 
-export {registerUser , loginUser,sendOtp,verifyOtp,changePass};
+export {registerUser ,sendOtp,verifyOtp,changePass};
