@@ -92,7 +92,7 @@ const PostJob = () => {
   return (
     <>
       <div className="w-4/5 mx-auto bs-mx:px-10 md-mx:px-5 relative">
-      <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ style: { backdropFilter: 'blur(4px)', backgroundColor: 'rgba(0,0,0,0.4)' } }} loaderProps={{ color: "bright-sun.4", size: "lg", type: "bars" }} />
+      
   
         <div className="text-2xl font-semibold mb-5">Post a Job</div>
         <div className="flex flex-col gap-5">
@@ -129,8 +129,8 @@ const PostJob = () => {
             <TextEditor form={form}  data={editorData}/>
           </div>
           <div className="flex gap-4">
-            <Button color="bright-sun.4" onClick={handlePost} variant="light" > Publish Job</Button>
-            <Button color="bright-sun.4" onClick={handleDraft} variant="outline">Save as Draft</Button>
+            <Button loading={loading} disabled={loading} color="bright-sun.4" onClick={handlePost} variant="light" > Publish Job</Button>
+            <Button loading={loading} disabled={loading} color="bright-sun.4" onClick={handleDraft} variant="outline">Save as Draft</Button>
           </div>
         </div>
       </div>
