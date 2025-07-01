@@ -23,7 +23,13 @@ const PostedJobPage=()=>{
         setJobList(res);
 
         if(res && res.length>0 && Number(id)==0)navigate(`/posted-job/${res[0].id}`)
-        setJob(res.find((item:any)=>item.id==id));
+        // setJob(res.find((item:any)=>item.id==id));
+      const foundJob = res.find((item: any) => item.id.toString() === id);
+      if (foundJob) {
+        setJob(foundJob);
+      } else {
+        setJob(null); // Or fallback logic
+      }
       }).catch((err)=>{
         console.log(err);
       })
