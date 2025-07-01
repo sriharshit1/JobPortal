@@ -1,4 +1,4 @@
-import { Button, NumberInput, TagsInput, Textarea } from "@mantine/core";
+import { Button, LoadingOverlay, NumberInput, TagsInput, Textarea } from "@mantine/core";
 import { content, fields } from "../Data/PostJob";
 import SelectInput from "./SelectInput";
 import TextEditor from "./TextEditor";
@@ -14,6 +14,8 @@ const PostJob = () => {
   const [editorData, setEditorData] = useState(content);
   const user = useSelector((state:any)=>state.user);
   const select = fields;
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(()=>{
     window.scroll(0,0);
@@ -61,6 +63,7 @@ const PostJob = () => {
   const handlePost=()=>{
     form.validate();
     if(!form.isValid()) return;
+    setLoading(true)
     postJob({...form.getValues(), id ,postedBy:user.id, jobStatus:"ACTIVE"}).then((res)=>{
       successNotification("Success","Job Posted Succesfully");
       navigate(`/posted-job/${res.id}`)
@@ -68,10 +71,13 @@ const PostJob = () => {
       console.log(err);
       errorNotification("Error",err.response.data.errorMessage);
     })
+    .finally(()=>{
+      setLoading(false);
+    })
   }
 
   const handleDraft=()=>{
-
+    setLoading(true)
     postJob({...form.getValues(), id ,postedBy:user.id, jobStatus:"DRAFT"}).then((res)=>{
       successNotification("Success","Job Drafted Succesfully");
      navigate(`/posted-job/${res.id}`)
@@ -79,10 +85,15 @@ const PostJob = () => {
       console.log(err);
       errorNotification("Error",err.response.data.errorMessage);
     })
+    .finally(()=>{
+      setLoading(false);
+    })
   }
   return (
     <>
-      <div className="w-4/5 mx-auto bs-mx:px-10 md-mx:px-5">
+      <div className="w-4/5 mx-auto bs-mx:px-10 md-mx:px-5 relative">
+      <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ style: { backdropFilter: 'blur(4px)', backgroundColor: 'rgba(0,0,0,0.4)' } }} loaderProps={{ color: "bright-sun.4", size: "lg", type: "bars" }} />
+  
         <div className="text-2xl font-semibold mb-5">Post a Job</div>
         <div className="flex flex-col gap-5">
           <div className="flex md-mx:gap-5 gap-10 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap">
