@@ -93,7 +93,6 @@ const PostJob = () => {
     <>
       <div className="w-4/5 mx-auto bs-mx:px-10 md-mx:px-5 relative">
       
-  
         <div className="text-2xl font-semibold mb-5">Post a Job</div>
         <div className="flex flex-col gap-5">
           <div className="flex md-mx:gap-5 gap-10 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap">

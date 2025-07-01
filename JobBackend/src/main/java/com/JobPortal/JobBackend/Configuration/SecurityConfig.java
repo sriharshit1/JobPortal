@@ -41,7 +41,7 @@ public class SecurityConfig {
                     .cors(Customizer.withDefaults())
                     .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/auth/login" , "/users/register" ,"/users/verifyOtp/**","/users/sendOtp/**","/applicant/*/resume", "/", "/ping").permitAll()
+                            .requestMatchers("/auth/login" , "/users/register" ,"/users/verifyOtp/**","/users/sendOtp/**","/applicant/*/resume", "/", "/ping","/{path:[^\\.]*}", "/**/{path:^(?!api).*$}").permitAll()
                             .anyRequest().authenticated()
                     )
                     .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
