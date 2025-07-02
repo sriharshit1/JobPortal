@@ -34,6 +34,27 @@ const PostedJobPage=()=>{
         console.log(err);
       })
    },[id]);
+
+   const refreshJobList = () => {
+  getJobPostedBy(user.id)
+    .then((res) => {
+      setJobList(res);
+      if (res && res.length > 0) {
+        const foundJob = res.find((item: any) => item.id.toString() === id);
+        if (foundJob) {
+          setJob(foundJob);
+        } else {
+          navigate(`/posted-job/${res[0].id}`);
+        }
+      } else {
+        setJob(null);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
     return(
         <>
         <div className="min-h-[90vh] bg-mine-shaft-950 font-['poppins'] px-5">
@@ -48,7 +69,7 @@ const PostedJobPage=()=>{
           {/* <div className="flex w-full gap-5 px-5 justify-around"> */}
           <div className="flex gap-5 ">
            { !matches&&<PostedJob job={job} jobList={jobList}/>}
-            <PostedJobDesc {...job}/>
+            <PostedJobDesc {...job} onJobDeleted={refreshJobList}/>
           </div>
         </div>
         </>

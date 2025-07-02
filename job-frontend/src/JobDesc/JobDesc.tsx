@@ -62,7 +62,7 @@ const JobDesc = (props: any) => {
   deleteJob(jobId)
     .then(() => {
       successNotification("Deleted", "Job deleted successfully");
-      window.location.href = "/posted-job/0"; // fallback redirect
+     props.onJobDeleted?.();
     })
     .catch((err) => {
       errorNotification("Error", err.response?.data?.errorMessage || "Failed to delete job");

@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -129,8 +130,15 @@ public class JobServiceImpl implements JobService{
 
     @Override
     public void deleteJob(Long id) throws JobPortalException {
-        Job job = jobRepository.findById(id)
-                .orElseThrow(() -> new JobPortalException("JOB_NOT_FOUND" + id));
-        jobRepository.delete(job);
+        System.out.println("JobService: deleting job with id = " + id);
+        Optional<Job> job = jobRepository.findById(id);
+        if (job.isEmpty()) {
+            throw new JobPortalException("Job not found with id " + id);
+        }
+
+        // add any permission checks here
+
+        jobRepository.deleteById(id);
+        System.out.println("Job deleted successfully");
     }
 }
