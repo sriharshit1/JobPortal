@@ -17,8 +17,4 @@ public class HealthApi {
         return "pong";
     }
 
-    @RequestMapping(value = {"/{path:[^\\.]*}", "/**/{path:^(?!api).*$}"})
-    public String forward() {
-        return "forward:/index.html";
-    }
 }

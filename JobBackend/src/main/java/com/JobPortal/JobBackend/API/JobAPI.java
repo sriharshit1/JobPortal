@@ -6,6 +6,7 @@ import com.JobPortal.JobBackend.DTO.Application;
 import com.JobPortal.JobBackend.DTO.JobDTO;
 import com.JobPortal.JobBackend.DTO.ResponseDto;
 import com.JobPortal.JobBackend.Exception.JobPortalException;
+import com.JobPortal.JobBackend.Repository.JobRepository;
 import com.JobPortal.JobBackend.Service.JobService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +60,11 @@ public class JobAPI {
         return new ResponseEntity<>(new ResponseDto("Application status changed Successfully."), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteJob(@PathVariable String id) throws JobPortalException {
+        jobService.deleteJob(Long.parseLong(id));  // Convert string to Long
+        return ResponseEntity.ok("Job deleted successfully");
+    }
 
 
 }

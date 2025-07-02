@@ -128,8 +128,8 @@ const PostJob = () => {
             <TextEditor form={form}  data={editorData}/>
           </div>
           <div className="flex gap-4">
-            <Button loading={loading} disabled={loading} color="bright-sun.4" onClick={handlePost} variant="light" > Publish Job</Button>
-            <Button loading={loading} disabled={loading} color="bright-sun.4" onClick={handleDraft} variant="outline">Save as Draft</Button>
+            <Button disabled={loading} color="bright-sun.4" onClick={handlePost} variant="light" > Publish Job</Button>
+            <Button disabled={loading} color="bright-sun.4" onClick={handleDraft} variant="outline">Save as Draft</Button>
           </div>
         </div>
       </div>

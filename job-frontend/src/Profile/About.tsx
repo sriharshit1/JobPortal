@@ -63,7 +63,7 @@ const About=()=>{
                   minRows={3} placeholder="Enter about yourself"
                     value={about}
                     onChange={(event) => setAbout(event.currentTarget.value)}
-                  />:<div className="text-sm text-mine-shaft-300 text-justify">
+                  />:<div className="whitespace-pre-wrap break-words text-sm text-mine-shaft-300 text-justify">
                     {profile?.about}
                   </div>
                   }

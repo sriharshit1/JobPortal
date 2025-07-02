@@ -21,5 +21,6 @@ public interface JobService  {
 
     void changeAppStatus(Application application) throws JobPortalException;
 
+    void deleteJob(Long id) throws JobPortalException;
 
 }

@@ -37,4 +37,8 @@ const changeAppStatus =async(application :any)=>{
     .catch(error=> {throw error;});
 }
 
-export {postJob, getAllJobs, getJob, applyJob,getJobPostedBy,changeAppStatus};
+const deleteJob = (jobId: string) => {
+  return axiosInstance.delete(`/jobs/${jobId}`);
+};
+
+export {postJob, getAllJobs, getJob, applyJob,getJobPostedBy,changeAppStatus, deleteJob};

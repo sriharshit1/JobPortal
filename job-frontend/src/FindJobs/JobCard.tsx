@@ -44,7 +44,7 @@ const JobCard = (props: any) => {
           <div>{props.location}</div>
         </div>
         <Text
-          className="!text-xs text-justify !text-mine-shaft-300"
+          className="!text-xs text-justify !text-mine-shaft-300 !text-justify"
           lineClamp={3}
         >
           {props.about}

@@ -126,4 +126,11 @@ public class JobServiceImpl implements JobService{
 //        jobRepository.save(job);
 
     }
+
+    @Override
+    public void deleteJob(Long id) throws JobPortalException {
+        Job job = jobRepository.findById(id)
+                .orElseThrow(() -> new JobPortalException("JOB_NOT_FOUND" + id));
+        jobRepository.delete(job);
+    }
 }

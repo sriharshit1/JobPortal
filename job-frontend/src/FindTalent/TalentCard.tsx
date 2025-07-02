@@ -78,7 +78,7 @@ const TalentCard = (props: any) => {
         </div>
         <div>
         <Text
-          className="!text-xs text-justify !text-mine-shaft-300"
+          className="!text-xs text-justify !text-mine-shaft-300 "
           lineClamp={3}
         >
           {profile?.about}
