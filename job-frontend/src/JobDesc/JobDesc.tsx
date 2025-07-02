@@ -126,7 +126,9 @@ const JobDesc = (props:any) => {
         </div>
         <Divider my="xl" />
 
-        <div className="[&_h4]:text-xl [&_*]:text-mine-shaft-300 [&_li]:marker:text-bright-sun-400 [&_li]:mb-1 [&_h4]:my-5 [&_h4]:font-semibold [&_h4]:text-mine-shaft-200 [&_p]:text-justify [&_p]:text-xs [&_li]:text-sm" dangerouslySetInnerHTML={{__html:data}}>
+        <div className="[&_h4]:text-xl [&_*]:text-mine-shaft-300 [&_li]:marker:text-bright-sun-400 [&_li]:mb-1 [&_h4]:my-5 [&_h4]:font-semibold [&_h4]:text-mine-shaft-200 [&_p]:text-justify [&_p]:text-xs [&_li]:text-sm"
+          
+      dangerouslySetInnerHTML={{__html:data}}>
 
         </div>
         <Divider my="xl" />

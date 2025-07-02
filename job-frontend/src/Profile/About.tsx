@@ -25,7 +25,7 @@ const About=()=>{
 
      const handleSave=()=>{
           setEdit(false);
-                let updatedProfile = {...profile , about:about}
+                const updatedProfile = {...profile , about:about}
                 dispatch(changeProfile(updatedProfile));
                 successNotification("Success","About Updated Successfully");
      }

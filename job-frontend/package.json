@@ -46,7 +46,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-   "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -70,7 +70,11 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.21",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.33.2",
     "postcss": "^8.5.4",
     "react-router-dom": "^7.6.3",
     "tailwindcss": "^3.4.17"

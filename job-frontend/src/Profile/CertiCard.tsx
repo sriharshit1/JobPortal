@@ -15,9 +15,9 @@ const profile = useSelector((state:any)=>state.profile)
  const matches = useMediaQuery('(max-width:475px');
 
   const handleDelete=()=>{
-      let certi=[...profile.certifications];
+      const certi=[...profile.certifications];
       certi.splice(props.index,1);
-      let updatedProfile={...profile,certifications:certi};
+      const updatedProfile={...profile,certifications:certi};
       dispatch(changeProfile(updatedProfile));
       successNotification("Success","Certificate Deleted Successflly");
   }

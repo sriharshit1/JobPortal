@@ -20,8 +20,8 @@ const profile = useSelector((state:any)=>state.profile);
 const {hovered,ref} = useHover();
 
   const handleFileChange=async(image:any)=>{
-    let picture:any = await getBase64(image);
-    let updatedProfile={...profile,picture:picture.split(',')[1]};
+    const picture:any = await getBase64(image);
+    const updatedProfile={...profile,picture:picture.split(',')[1]};
     dispatch(changeProfile(updatedProfile));
       successNotification("Success", "Profile Updated Successfully");
   };

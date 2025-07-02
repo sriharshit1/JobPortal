@@ -40,7 +40,7 @@ const Info =()=>{
 }
 const handleSave=()=>{
    setEdit(false);
-        let updatedProfile = {...profile , ...form.getValues()}
+        const updatedProfile = {...profile , ...form.getValues()}
         dispatch(changeProfile(updatedProfile));
         successNotification("Success","Profile Updated Successfully");
 }

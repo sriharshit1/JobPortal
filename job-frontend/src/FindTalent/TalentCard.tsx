@@ -157,7 +157,7 @@ const TalentCard = (props: any) => {
             Email:&emsp;<a className="text-bright-sun-400 hover:underline cursor-pointer text-center" href={`mailto:${props.email}`}>{props.email}</a>
           </div>
           <div>
-            Website:&emsp;<a target="_blank" className="text-bright-sun-400  hover:underline cursor-pointer text-center" href={props.website}>{props.website}</a>
+            Website:&emsp;<a target="_blank" className="text-bright-sun-400  hover:underline cursor-pointer text-center" href={props.website} rel="noreferrer">{props.website}</a>
           </div>
           <div>
             Resume:&emsp;<span className="text-bright-sun-400 hover:underline cursor-pointer text-center" onClick={()=>openBase64PDF(props.resume)}>{props.name}</span>

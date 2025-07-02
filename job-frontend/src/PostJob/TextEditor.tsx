@@ -33,7 +33,7 @@ const TextEditor=(props:any)=> {
   });
 
   return (
-     <div className="break-words whitespace-pre-wrap">
+    
     <RichTextEditor editor={editor}>
       <RichTextEditor.Toolbar bg="mine-shaft.10" sticky stickyOffset="var(--docs-header-height)">
         <RichTextEditor.ControlsGroup>
@@ -79,7 +79,6 @@ const TextEditor=(props:any)=> {
 
       <RichTextEditor.Content bg="mine-shaft.10" />
     </RichTextEditor>
-    </div>
   );
 }
 

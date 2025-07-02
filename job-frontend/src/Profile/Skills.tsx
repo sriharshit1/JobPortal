@@ -26,7 +26,7 @@ const Skills =()=>{
     
          const handleSave=()=>{
               setEdit(false);
-                    let updatedProfile = {...profile , skills:skills}
+                    const updatedProfile = {...profile , skills:skills}
                     dispatch(changeProfile(updatedProfile));
                     successNotification("Success","Skills Updated Successfully");
          }

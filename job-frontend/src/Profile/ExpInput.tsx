@@ -52,7 +52,7 @@ const ExpInput = (props: any) => {
   };
 
     // let exp = [...profile.experiences];
-    let exp = Array.isArray(profile.experiences) ? [...profile.experiences] : [];
+    const exp = Array.isArray(profile.experiences) ? [...profile.experiences] : [];
 
 
     if (props.add) {
@@ -70,7 +70,7 @@ const ExpInput = (props: any) => {
     //  exp[props.index].startDate=exp[props.index].startDate.toISOString();
     //   exp[props.index].endDate=exp[props.index].endDate.toISOString();
     // }
-    let updatedProfile = {...profile,experiences:exp}
+    const updatedProfile = {...profile,experiences:exp}
     props.setEdit(false);
     dispatch(changeProfile(updatedProfile));
                     successNotification("Success",`Experience ${props.add?"Added":"Updated"} Successfully`);

@@ -26,7 +26,7 @@ const SignUp = () => {
       setData({ ...data, accountType: event });
       return;
     }
-    let name = event.target.name,
+    const name = event.target.name,
       value = event.target.value;
     setData({ ...data, [name]: value });
     setFormError({ ...formError, [name]: signupValidation(name, value) });
@@ -45,7 +45,7 @@ const SignUp = () => {
   const handleSubmit = () => {
     
     let valid = true,newFormError:{[key:string]:string}={};
-    for (let key in data){
+    for (const key in data){
         if(key === "accountType")continue;
         if(key !== "confirmPassword") newFormError[key]= signupValidation(key,data[key]);
         else if(data[key] !== data["password"])newFormError[key]="Passwords do not match."
@@ -88,7 +88,7 @@ const SignUp = () => {
         })
         });
           
-      };
+      }
     }
   return (
     <>

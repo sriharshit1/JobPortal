@@ -17,7 +17,7 @@ const JobCard = (props: any) => {
     }else{
       savedJobs = [...savedJobs, props.id];
     }
-    let updatedProfile = {...profile, savedJobs:savedJobs};
+    const updatedProfile = {...profile, savedJobs:savedJobs};
     dispatch(changeProfile(updatedProfile));
   }
   return (

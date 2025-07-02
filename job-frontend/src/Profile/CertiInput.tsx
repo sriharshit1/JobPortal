@@ -78,7 +78,7 @@ return(
         <div className="flex gap-10 [&>*]:w-1/2 md-mx:gap-5 xs-mx:[&>*]:w-full xs-mx:flex-wrap my-3">
                     <MonthPickerInput {...form.getInputProps("issueDate")}
             withAsterisk
-            maxDate={new Date}
+            maxDate={new Date()}
             label="Issue date"
             placeholder="Pick date"
           
