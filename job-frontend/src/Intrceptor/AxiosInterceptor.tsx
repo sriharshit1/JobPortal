@@ -39,7 +39,7 @@ export const setupResponseInterpretor = (navigate:any)=>{
             if(error.response?.status === 401 || error.response?.status === 403){
 
                 if(!hasAlreadyHandled){
-
+                        hasAlreadyHandled = true;
                 
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
