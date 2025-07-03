@@ -80,12 +80,23 @@ const Talents=()=>{
            
             </div> */}
         {/* To Stop Flickering */}
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-  {
-    filterTalents.length ? filterTalents.map((talent:any,index:any)=><TalentCard key={index} {...talent}/>) :
-    <div className="text-xl font-semibold">No Talents Found</div>
-  }
-</div>
+            <div className="mt-10 px-4">
+        {loading ? (
+          <div className="text-center text-gray-400 text-lg py-10 animate-pulse">
+            Loading talents...
+          </div>
+        ) : filterTalents.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filterTalents.map((talent: any, index: any) => (
+              <TalentCard key={index} {...talent} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-400 text-lg py-10">
+            No Talents Found
+          </div>
+        )}
+      </div>
 
            
         </div>
