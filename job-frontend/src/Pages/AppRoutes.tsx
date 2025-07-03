@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Router, Routes, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import { Divider } from "@mantine/core";
 import FindJobsPage from "./FindJobsPage";
@@ -19,10 +19,17 @@ import ProtectedRoute from "../Services/ProtectedRoute";
 import PublicRoute from "../Services/PublicRoute";
 import ResumePage from "./ResumePage";
 import ScrollToTop from "../Components/Global/ScrollToTop";
+import { useEffect } from "react";
+import { setupResponseInterpretor } from "../Intrceptor/AxiosInterceptor";
 
 
 const AppRoutes=()=>{
     const user = useSelector((state:any)=>state.user);
+    const navigate=useNavigate();
+
+    useEffect(()=>{
+      setupResponseInterpretor(navigate);
+    },[navigate]);
     return(
         <>
           <BrowserRouter>

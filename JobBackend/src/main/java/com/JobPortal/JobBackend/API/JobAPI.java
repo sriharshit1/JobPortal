@@ -61,17 +61,10 @@ public class JobAPI {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteJob(@PathVariable String id) {
-        try {
-            System.out.println("Trying to delete job with ID: " + id);
-            jobService.deleteJob(Long.parseLong(id));
-            return ResponseEntity.ok("Job deleted successfully");
-        } catch (Exception e) {
-            e.printStackTrace(); // print error in logs
-            return ResponseEntity.status(500).body("Error deleting job: " + e.getMessage());
-        }
+    public ResponseEntity<String> deleteJob(@PathVariable String id) throws JobPortalException {
+        jobService.deleteJob(Long.parseLong(id));  // Convert string to Long
+        return ResponseEntity.ok("Job deleted successfully");
     }
-
 
 
 }

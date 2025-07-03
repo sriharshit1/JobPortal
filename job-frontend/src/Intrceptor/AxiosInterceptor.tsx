@@ -1,4 +1,8 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
+import Store from "../Store";
+import { removeJwt } from "../Slices/JWTSlice";
+import { removeUser } from "../Slices/UserSlice";
+import { errorNotification } from "../Services/NotificationService";
 
 const axiosInstance = axios.create({
     // baseURL:"http://localhost:8080"
@@ -24,9 +28,24 @@ export const setupResponseInterpretor = (navigate:any)=>{
         (response)=>{
             return response;
         },
+        // (error)=>{
+        //     if(error.response?.status == 401){
+        //         navigate('/login');
+        //     }
+        //     return Promise.reject(error);
+        // }
         (error)=>{
-            if(error.response?.status == 401){
-                navigate('/login');
+            if(error.response?.status === 401 || error.response?.status === 403){
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+
+                Store.dispatch(removeJwt());
+                Store.dispatch(removeUser());
+
+                errorNotification("Session Expired","Please Login again");
+
+                navigate("/login");
+
             }
             return Promise.reject(error);
         }
