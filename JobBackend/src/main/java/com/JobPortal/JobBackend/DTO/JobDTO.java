@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,8 @@ public class JobDTO {
     private String jobType;
     private String location;
     private Long packageOffered;
-    private LocalDateTime postTime;
+//    private LocalDateTime postTime;
+private Instant postTime;
     private String description;
     private List<String> skillsRequired;
     private JobStatus jobStatus;

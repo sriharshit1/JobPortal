@@ -28,7 +28,7 @@ const MultiInput=(props:any)=> {
     if (val === '$create') {
       setData((current) => [...current, search]);
       setValue((current) => [...current, search]);
-      dispatch(updateFilter({[props.title]: [value,search]}) );
+      dispatch(updateFilter({[props.title]: [...value,search]}) );
     } else {
       dispatch(updateFilter({[props.title]:value.includes(val)?value.filter((v)=>
       v != val):[...value,val]}));

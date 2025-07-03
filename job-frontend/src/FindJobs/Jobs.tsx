@@ -31,16 +31,17 @@ const Jobs = () => {
   useEffect(() => {
     dispatch(resetFilter());
     dispatch(resetSort());
-    setLoading(true);
-    getAllProfiles()
-      .then((res) => {
-        setJobList(res.filter((job: any) => job.jobStatus == "ACTIVE"));
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+    // setLoading(true);
+    // getAllProfiles()
+    //   .then((res) => {
+    //     setJobList(res.filter((job: any) => job.jobStatus == "ACTIVE"));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setLoading(false);
+    //   });
   }, []);
+
   useEffect(() => {
     if (sort == "Most Recent") {
       setJobList(

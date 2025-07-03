@@ -22,6 +22,7 @@ axiosInstance.interceptors.request.use(
         return Promise.reject(error);
     }
 )
+let hasAlreadyHandled = false;
 
 export const setupResponseInterpretor = (navigate:any)=>{
     axiosInstance.interceptors.response.use(
@@ -36,6 +37,10 @@ export const setupResponseInterpretor = (navigate:any)=>{
         // }
         (error)=>{
             if(error.response?.status === 401 || error.response?.status === 403){
+
+                if(!hasAlreadyHandled){
+
+                
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
 
@@ -47,6 +52,7 @@ export const setupResponseInterpretor = (navigate:any)=>{
                 navigate("/login");
 
             }
+        }
             return Promise.reject(error);
         }
     )

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,8 @@ public class Job {
     private String jobType;
     private String location;
     private Long packageOffered;
-    private LocalDateTime postTime;
+//    private LocalDateTime postTime;
+    private Instant postTime;
     private String description;
     private List<String> skillsRequired;
     private JobStatus jobStatus;

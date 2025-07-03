@@ -10,6 +10,7 @@ import com.JobPortal.JobBackend.Utility.Utilities;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class JobServiceImpl implements JobService{
         //VIDEO
         if(jobDTO.getId() == 0){
             jobDTO.setId(Utilities.getNextSequence("jobs"));
-            jobDTO.setPostTime(LocalDateTime.now());
+            jobDTO.setPostTime(Instant.now());
             NotificationDTO notificationDTO = new NotificationDTO();
             notificationDTO.setAction("Job posted");
             notificationDTO.setMessage("Job posted successfully for: "+jobDTO.getJobTitle()+" at "+jobDTO.getCompany());
@@ -41,7 +42,7 @@ public class JobServiceImpl implements JobService{
         }else{
             Job job = jobRepository.findById(jobDTO.getId()).orElseThrow(()-> new JobPortalException("JOB_NOT_FOUND"));
             if(job.getJobStatus().equals(JobStatus.DRAFT) || jobDTO.getJobStatus().equals(JobStatus.CLOSED))jobDTO.setPostTime(
-                    LocalDateTime.now()
+                    Instant.now()
             );
         }
 
@@ -130,15 +131,10 @@ public class JobServiceImpl implements JobService{
 
     @Override
     public void deleteJob(Long id) throws JobPortalException {
-        System.out.println("JobService: deleting job with id = " + id);
         Optional<Job> job = jobRepository.findById(id);
         if (job.isEmpty()) {
             throw new JobPortalException("Job not found with id " + id);
         }
-
-        // add any permission checks here
-
         jobRepository.deleteById(id);
-        System.out.println("Job deleted successfully");
     }
 }
