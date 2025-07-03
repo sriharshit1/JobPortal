@@ -32,7 +32,7 @@ const AppRoutes=()=>{
     },[navigate]);
     return(
         <>
-          <BrowserRouter>
+         
           <ScrollToTop/>
       <div className='relative'>
       <Header/>
@@ -55,7 +55,7 @@ const AppRoutes=()=>{
       </Routes>
       <Footer/>
       </div>
-      </BrowserRouter>
+     
         </>
     )
 }

@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import Store from './Store';
 import AppRoutes from './Pages/AppRoutes';
 import GlobalLoader from './Components/Global/GlobalLoader';
+import { BrowserRouter } from 'react-router-dom';
 
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
       
     }
   })
+
+  
   
   return (
     
@@ -34,7 +37,9 @@ function App() {
     <MantineProvider defaultColorScheme='dark' theme={theme}>
       <Notifications position='top-center' zIndex={1000} />
       <GlobalLoader/>
+      <BrowserRouter>
       <AppRoutes/>
+      </BrowserRouter>
     </MantineProvider>
     </Provider>
     </>
