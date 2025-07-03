@@ -39,6 +39,8 @@ public class UserServiceImpl implements UserService{
     @Value("${spring.mail.properties.mail.smtp.from}")
     private String fromEmail;
 
+
+
     @Override
     public UserDto registerUser(UserDto userDto) throws JobPortalException {
         Optional<User> optional = userRepository.findByEmail(userDto.getEmail());

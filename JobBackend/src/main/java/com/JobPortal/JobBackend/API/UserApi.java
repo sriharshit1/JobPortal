@@ -4,6 +4,7 @@ import com.JobPortal.JobBackend.DTO.LoginDto;
 import com.JobPortal.JobBackend.DTO.ResponseDto;
 import com.JobPortal.JobBackend.DTO.UserDto;
 import com.JobPortal.JobBackend.Exception.JobPortalException;
+import com.JobPortal.JobBackend.Service.EmailService;
 import com.JobPortal.JobBackend.Service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -22,11 +23,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserApi {
 
     private final UserService userService;
+    private final EmailService emailService;
 
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> registerUser(@RequestBody @Valid UserDto userDto) throws JobPortalException {
         userDto = userService.registerUser(userDto);
+        emailService.sendWelcomeEmail(userDto.getEmail(),userDto.getName());
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
