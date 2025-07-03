@@ -30,10 +30,6 @@ public class UserApi {
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<UserDto> loginUser(@RequestBody @Valid LoginDto loginDto) throws JobPortalException {
-//        return new ResponseEntity<>(userService.loginUser(loginDto), HttpStatus.OK);
-//    }
 
     @PostMapping("/changePass")
     public ResponseEntity<ResponseDto> changePassword(@RequestBody @Valid LoginDto loginDto) throws JobPortalException {
