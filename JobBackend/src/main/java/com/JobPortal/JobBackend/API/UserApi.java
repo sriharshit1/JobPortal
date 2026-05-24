@@ -29,7 +29,13 @@ public class UserApi {
     @PostMapping("/register")
     public ResponseEntity<UserDto> registerUser(@RequestBody @Valid UserDto userDto) throws JobPortalException {
         userDto = userService.registerUser(userDto);
-        emailService.sendWelcomeEmail(userDto.getEmail(),userDto.getName());
+//        emailService.sendWelcomeEmail(userDto.getEmail(),userDto.getName());
+        try {
+            emailService.sendWelcomeEmail(userDto.getEmail(), userDto.getName());
+        } catch (Exception e) {
+            // Email failure is non-fatal — user is already saved
+            System.err.println("Welcome email failed (non-fatal): " + e.getMessage());
+        }
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
@@ -50,6 +56,8 @@ public class UserApi {
         userService.verifyOtp(email,otp);
         return new ResponseEntity<>(new ResponseDto("OTP is Verified"), HttpStatus.OK);
     }
+
+
 
 
 }

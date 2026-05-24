@@ -75,20 +75,46 @@ public class UserServiceImpl implements UserService{
         return user.toDto();
     }
 
+//    @Override
+//    public Boolean sendOtp(String email) throws Exception {
+//         User user = userRepository.findByEmail(email)
+//                .orElseThrow(()-> new JobPortalException("USER_NOT_FOUND"));
+//        MimeMessage mm = mailSender.createMimeMessage();
+//        MimeMessageHelper message = new MimeMessageHelper(mm,true);
+//        message.setFrom(fromEmail);
+//        message.setTo(email);
+//        message.setSubject("Your OTP Code");
+//        String genOtp = Utilities.generateOtp();
+//        OTP otp= new OTP(email,genOtp, LocalDateTime.now());
+//        otpRepository.save(otp);
+//        message.setText(Data.getMessageBody(genOtp,user.getName()),true);
+//        mailSender.send(mm);
+//        return true;
+//    }
+
     @Override
     public Boolean sendOtp(String email) throws Exception {
-         User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new JobPortalException("USER_NOT_FOUND"));
-        MimeMessage mm = mailSender.createMimeMessage();
-        MimeMessageHelper message = new MimeMessageHelper(mm,true);
-        message.setFrom(fromEmail);
-        message.setTo(email);
-        message.setSubject("Your OTP Code");
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new JobPortalException("USER_NOT_FOUND"));
+
         String genOtp = Utilities.generateOtp();
-        OTP otp= new OTP(email,genOtp, LocalDateTime.now());
+        OTP otp = new OTP(email, genOtp, LocalDateTime.now());
         otpRepository.save(otp);
-        message.setText(Data.getMessageBody(genOtp,user.getName()),true);
-        mailSender.send(mm);
+
+        try {
+            MimeMessage mm = mailSender.createMimeMessage();
+            MimeMessageHelper message = new MimeMessageHelper(mm, true);
+            message.setFrom(fromEmail);
+            message.setTo(email);
+            message.setSubject("Your OTP Code");
+            message.setText(Data.getMessageBody(genOtp, user.getName()), true);
+            mailSender.send(mm);
+        } catch (Exception e) {
+            // OTP is saved — user can retry, but don't crash
+            System.err.println("OTP email failed: " + e.getMessage());
+            throw new JobPortalException("OTP_MAIL_FAILED"); // optional: tell frontend
+        }
+
         return true;
     }
 

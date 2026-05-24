@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +21,7 @@ public class EmailServiceImpl implements EmailService{
     @Value("${spring.mail.properties.mail.smtp.from}")
     private String fromEmail;
 
+    @Async
     public void sendWelcomeEmail(String email, String name) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
