@@ -1,43 +1,64 @@
 package com.JobPortal.JobBackend.Service;
 
 import com.JobPortal.JobBackend.Utility.EmailData;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 @Service
 @RequiredArgsConstructor
-public class EmailServiceImpl implements EmailService{
+public class EmailServiceImpl implements EmailService {
 
+    @Value("${brevo.api.key}")
+    private String brevoApiKey;
 
-    private final JavaMailSender mailSender;
-
-    @Value("${spring.mail.properties.mail.smtp.from}")
-    private String fromEmail;
+    @Value("${brevo.sender.email}")
+    private String senderEmail;
 
     @Async
     public void sendWelcomeEmail(String email, String name) {
         try {
-            MimeMessage mimeMessage = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            String htmlContent = EmailData.getWelcomeEmail(name)
+                    .replace("\\", "\\\\")
+                    .replace("\"", "\\\"")
+                    .replace("\n", "\\n")
+                    .replace("\r", "");
 
-            helper.setFrom(fromEmail);
-            helper.setTo(email);
-            helper.setSubject("🎉 Welcome to HireX – Your Job Journey Starts Here!");
+            String jsonBody = """
+                    {
+                        "sender": {"name": "HireX", "email": "%s"},
+                        "to": [{"email": "%s", "name": "%s"}],
+                        "subject": "Welcome to HireX – Your Job Journey Starts Here!",
+                        "htmlContent": "%s"
+                    }
+                    """.formatted(senderEmail, email, name, htmlContent);
 
-            String htmlContent = EmailData.getWelcomeEmail(name);
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://api.brevo.com/v3/smtp/email"))
+                    .header("accept", "application/json")
+                    .header("api-key", brevoApiKey)
+                    .header("content-type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                    .build();
 
-            helper.setText(htmlContent, true);
-            mailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            throw new RuntimeException("Failed to send email", e);
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 201) {
+                System.out.println("Welcome email sent successfully to " + email);
+            } else {
+                System.err.println("Brevo API error: " + response.statusCode() + " " + response.body());
+            }
+
+        } catch (Exception e) {
+            System.err.println("Welcome email failed (non-fatal): " + e.getMessage());
         }
     }
-
 }
